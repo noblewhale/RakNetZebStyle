@@ -29,3 +29,5 @@ Debug/
 Release/
 .DS_Store
 .Trashes
+RakNet*.so
+DependentExtensions/Swig/SwigOutput/

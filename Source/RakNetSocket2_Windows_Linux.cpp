@@ -78,6 +78,40 @@ void GetMyIP_Windows_Linux_IPV4( SystemAddress addresses[MAXIMUM_NUMBER_OF_INTER
     (void) err;
 	RakAssert(err != -1);
 	
+#if defined(__GLIBC__)
+  struct ifaddrs *myaddrs, *ifa;
+  void *in_addr;
+  char buf[64];
+
+  if(getifaddrs(&myaddrs) != 0)
+  {
+      perror("getifaddrs");
+      exit(1);
+  }
+
+  for (ifa = myaddrs; ifa != NULL; ifa = ifa->ifa_next)
+  {
+      if (ifa->ifa_addr == NULL)
+          continue;
+      if (!(ifa->ifa_flags & IFF_UP))
+          continue;
+      switch (ifa->ifa_addr->sa_family)
+      {
+          case AF_INET:
+          {
+              struct sockaddr_in *ipv4 = (struct sockaddr_in *)ifa->ifa_addr;
+              if (ipv4->sin_addr.s_addr == htonl(INADDR_LOOPBACK))
+                  continue;
+              printf("Addr: %s\n", inet_ntoa(ipv4->sin_addr));
+              printf("\n");
+              memcpy(&addresses[idx].address.addr4,ipv4,sizeof(sockaddr_in));
+              idx++;
+          }
+      }
+  }
+
+  freeifaddrs(myaddrs);
+#else
 	struct hostent *phe = gethostbyname( ac );
 
 	if ( phe == 0 )
@@ -92,7 +126,7 @@ void GetMyIP_Windows_Linux_IPV4( SystemAddress addresses[MAXIMUM_NUMBER_OF_INTER
 
 		memcpy(&addresses[idx].address.addr4.sin_addr,phe->h_addr_list[ idx ],sizeof(struct in_addr));
 	}
-	
+#endif	
 	while (idx < MAXIMUM_NUMBER_OF_INTERNAL_IDS)
 	{
 		addresses[idx]=UNASSIGNED_SYSTEM_ADDRESS;
