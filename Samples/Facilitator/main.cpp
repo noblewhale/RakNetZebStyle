@@ -48,10 +48,10 @@ int main(int argc, char **argv)
   }
   
   sd[0].port=DEFAULT_RAKPEER_PORT;
+  strcpy(sd[0].hostAddress, ipList[0].ToString(false));
   printf("Using port %i\n", sd[0].port);
   if (i>=2)
   {
-    strcpy(sd[0].hostAddress, ipList[0].ToString(false));
     sd[1].port=DEFAULT_RAKPEER_PORT+1;
     strcpy(sd[1].hostAddress, ipList[1].ToString(false));
     sdLen=2;
@@ -80,7 +80,18 @@ int main(int argc, char **argv)
   {
     for (packet=rakPeer->Receive(); packet; rakPeer->DeallocatePacket(packet), packet=rakPeer->Receive())
     {
-      
+		switch(packet->data[0])
+		{
+			case ID_NEW_INCOMING_CONNECTION:
+				printf("Got a connection from %s with guid: %s\n", packet->systemAddress.ToString(), packet->guid.ToString());
+				break;
+			case ID_CONNECTION_LOST:
+				printf(" Lost connection with %s with guid: %s\n", packet->systemAddress.ToString(), packet->guid.ToString());
+				break;
+			default:
+				int msgType = (int)packet->data[0];
+				printf("Received message ID: %i from %s with guid %s", msgType, packet->systemAddress.ToString(), packet->guid.ToString());
+		}
     }
 
     if (kbhit())
