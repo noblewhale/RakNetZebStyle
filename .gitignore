@@ -7,6 +7,8 @@ x64/
 *.sdf
 *.user
 *.suo
+*.pdb
+*.ncb
 
 # Xcode and OS X 
 build/
