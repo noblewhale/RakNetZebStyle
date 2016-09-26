@@ -6471,7 +6471,7 @@ void RakPeer::FillIPList(void)
 #endif
 
 	// Sort the addresses from lowest to highest
-	int startingIdx = 0;
+	/*int startingIdx = 0;
 	while (startingIdx < MAXIMUM_NUMBER_OF_INTERNAL_IDS-1 && ipList[startingIdx] != UNASSIGNED_SYSTEM_ADDRESS)
 	{
 		int lowestIdx = startingIdx;
@@ -6489,7 +6489,7 @@ void RakPeer::FillIPList(void)
 			ipList[lowestIdx] = temp;
 		}
 		++startingIdx;
-	}
+	}*/
 }
 
 
