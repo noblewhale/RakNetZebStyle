@@ -34,7 +34,6 @@ int main(int argc, char **argv)
   for (i=0; i < MAXIMUM_NUMBER_OF_INTERNAL_IDS; i++)
   {
 	const char* localIP = rakPeer->GetLocalIP(i);
-	printf("qwe %s\n", localIP);
     ipList[i]=localIP;
 	if (strcmp(localIP, UNASSIGNED_SYSTEM_ADDRESS.ToString(false)) != 0)
       printf("%i. %s\n", i+1, localIP);
