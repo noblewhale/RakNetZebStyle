@@ -129,7 +129,6 @@ void GetMyIP_Windows_Linux_IPV4( SystemAddress addresses[MAXIMUM_NUMBER_OF_INTER
 #endif	
 	while (idx < MAXIMUM_NUMBER_OF_INTERNAL_IDS)
 	{
-		printf("empty ip");
 		addresses[idx]=UNASSIGNED_SYSTEM_ADDRESS;
 		idx++;
 	}
