@@ -27,13 +27,13 @@ static int DEFAULT_RAKPEER_PORT=61111;
 int main(int argc, char **argv)
 {
   RakNet::RakPeerInterface *rakPeer=RakNet::RakPeerInterface::GetInstance();
+  
   SystemAddress ipList[ MAXIMUM_NUMBER_OF_INTERNAL_IDS ];
   printf("IPs:\n");
   unsigned int i;
   for (i=0; i < MAXIMUM_NUMBER_OF_INTERNAL_IDS; i++)
   {
     ipList[i]=rakPeer->GetLocalIP(i);
-	printf("%s != %s\n", ipList[i].ToString(), UNASSIGNED_SYSTEM_ADDRESS.ToString());
     if (ipList[i]!=UNASSIGNED_SYSTEM_ADDRESS)
       printf("%i. %s\n", i+1, ipList[i].ToString(false));
     else

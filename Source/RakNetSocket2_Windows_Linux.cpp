@@ -99,8 +99,6 @@ void GetMyIP_Windows_Linux_IPV4( SystemAddress addresses[MAXIMUM_NUMBER_OF_INTER
               struct sockaddr_in *ipv4 = (struct sockaddr_in *)ifa->ifa_addr;
               if (ipv4->sin_addr.s_addr == htonl(INADDR_LOOPBACK))
                   continue;
-              printf("Addr: %s\n", inet_ntoa(ipv4->sin_addr));
-              printf("\n");
               memcpy(&addresses[idx].address.addr4,ipv4,sizeof(sockaddr_in));
               idx++;
           }
@@ -133,6 +131,15 @@ void GetMyIP_Windows_Linux_IPV4( SystemAddress addresses[MAXIMUM_NUMBER_OF_INTER
 		idx++;
 	}
 
+  printf("IPasdadss:\n");
+  unsigned int i;
+  for (i=0; i < MAXIMUM_NUMBER_OF_INTERNAL_IDS; i++)
+  {
+    if (addresses[i]!=UNASSIGNED_SYSTEM_ADDRESS)
+      printf("%i. %s\n", i+1, addresses[i].ToString(false));
+    else
+      break;
+  }
 }
 
 #endif // RAKNET_SUPPORT_IPV6==1

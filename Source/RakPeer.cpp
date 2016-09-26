@@ -6470,8 +6470,17 @@ void RakPeer::FillIPList(void)
 	RakNetSocket2::GetMyIP( ipList );
 #endif
 
+  printf("qweqwe:\n");
+  unsigned int i;
+  for (i=0; i < MAXIMUM_NUMBER_OF_INTERNAL_IDS; i++)
+  {
+    if (ipList[i]!=UNASSIGNED_SYSTEM_ADDRESS)
+      printf("%i. %s\n", i+1, ipList[i].ToString(false));
+    else
+      break;
+  }
 	// Sort the addresses from lowest to highest
-	/*int startingIdx = 0;
+	int startingIdx = 0;
 	while (startingIdx < MAXIMUM_NUMBER_OF_INTERNAL_IDS-1 && ipList[startingIdx] != UNASSIGNED_SYSTEM_ADDRESS)
 	{
 		int lowestIdx = startingIdx;
@@ -6489,7 +6498,7 @@ void RakPeer::FillIPList(void)
 			ipList[lowestIdx] = temp;
 		}
 		++startingIdx;
-	}*/
+	}
 }
 
 
