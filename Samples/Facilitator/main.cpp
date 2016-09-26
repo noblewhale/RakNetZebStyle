@@ -36,8 +36,8 @@ int main(int argc, char **argv)
 	const char* localIP = rakPeer->GetLocalIP(i);
 	printf("qwe %s\n", localIP);
     ipList[i]=localIP;
-	if (ipList[i] != UNASSIGNED_SYSTEM_ADDRESS)
-      printf("%i. %s\n", i+1, ipList[i].ToString(false));
+	if (strcmp(localIP, UNASSIGNED_SYSTEM_ADDRESS.ToString(false)) != 0)
+      printf("%i. %s\n", i+1, localIP);
     else
       break;
   }
