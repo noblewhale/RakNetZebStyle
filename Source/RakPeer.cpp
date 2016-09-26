@@ -6499,6 +6499,15 @@ void RakPeer::FillIPList(void)
 		}
 		++startingIdx;
 	}
+
+	 printf("qweqwe:\n");
+  for (i=0; i < MAXIMUM_NUMBER_OF_INTERNAL_IDS; i++)
+  {
+    if (ipList[i]!=UNASSIGNED_SYSTEM_ADDRESS)
+      printf("%i. %s\n", i+1, ipList[i].ToString(false));
+    else
+      break;
+  }
 }
 
 
