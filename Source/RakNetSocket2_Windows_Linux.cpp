@@ -99,7 +99,7 @@ void GetMyIP_Windows_Linux_IPV4( SystemAddress addresses[MAXIMUM_NUMBER_OF_INTER
               struct sockaddr_in *ipv4 = (struct sockaddr_in *)ifa->ifa_addr;
               if (ipv4->sin_addr.s_addr == htonl(INADDR_LOOPBACK))
                   continue;
-              memcpy(&addresses[idx].address.addr4,ipv4,sizeof(sockaddr_in));
+              memcpy(&addresses[idx].address.addr4.sin_addr,&(ipv4->sin_addr),sizeof(struct in_addr));
               idx++;
           }
       }

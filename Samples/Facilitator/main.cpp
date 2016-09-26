@@ -33,9 +33,10 @@ int main(int argc, char **argv)
   unsigned int i;
   for (i=0; i < MAXIMUM_NUMBER_OF_INTERNAL_IDS; i++)
   {
-	const char* localIP = rakPeer->GetLocalIP(i);
+    const char* localIP = rakPeer->GetLocalIP(i);
     ipList[i]=localIP;
-	if (strcmp(localIP, UNASSIGNED_SYSTEM_ADDRESS.ToString(false)) != 0)
+    ipList[i] = rakPeer->GetLocalIP(i);
+    if (strcmp(localIP, UNASSIGNED_SYSTEM_ADDRESS.ToString(false)) != 0)
       printf("%i. %s\n", i+1, localIP);
     else
       break;
@@ -90,9 +91,12 @@ int main(int argc, char **argv)
 			case ID_CONNECTION_LOST:
 				printf(" Lost connection with %s with guid: %s\n", packet->systemAddress.ToString(), packet->guid.ToString());
 				break;
+      case ID_DISCONNECTION_NOTIFICATION:
+				printf("Got a disconnect from %s with guid: %s\n", packet->systemAddress.ToString(), packet->guid.ToString());
+				break;
 			default:
 				int msgType = (int)packet->data[0];
-				printf("Received message ID: %i from %s with guid %s", msgType, packet->systemAddress.ToString(), packet->guid.ToString());
+				printf("Received code %i from %s with guid: %s\n", msgType, packet->systemAddress.ToString(), packet->guid.ToString());
 		}
     }
 
