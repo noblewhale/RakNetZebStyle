@@ -130,16 +130,6 @@ void GetMyIP_Windows_Linux_IPV4( SystemAddress addresses[MAXIMUM_NUMBER_OF_INTER
 		addresses[idx]=UNASSIGNED_SYSTEM_ADDRESS;
 		idx++;
 	}
-
-  printf("IPasdadss:\n");
-  unsigned int i;
-  for (i=0; i < MAXIMUM_NUMBER_OF_INTERNAL_IDS; i++)
-  {
-    if (addresses[i]!=UNASSIGNED_SYSTEM_ADDRESS)
-      printf("%i. %s\n", i+1, addresses[i].ToString(false));
-    else
-      break;
-  }
 }
 
 #endif // RAKNET_SUPPORT_IPV6==1

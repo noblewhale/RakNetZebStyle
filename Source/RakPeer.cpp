@@ -2617,10 +2617,12 @@ const char* RakPeer::GetLocalIP( unsigned int index )
 	FillIPList();
 
 	}
-
+	
+	printf ("get local IP %s\n", ipList[index].ToString(false));
 
 	static char str[128];
 	ipList[index].ToString(false,str);
+	printf ("get local IP2 %s\n", str);
 	return str;
 
 
@@ -6469,16 +6471,6 @@ void RakPeer::FillIPList(void)
 #if  !defined(WINDOWS_STORE_RT)
 	RakNetSocket2::GetMyIP( ipList );
 #endif
-
-  printf("qweqwe:\n");
-  unsigned int i;
-  for (i=0; i < MAXIMUM_NUMBER_OF_INTERNAL_IDS; i++)
-  {
-    if (ipList[i]!=UNASSIGNED_SYSTEM_ADDRESS)
-      printf("%i. %s\n", i+1, ipList[i].ToString(false));
-    else
-      break;
-  }
 	// Sort the addresses from lowest to highest
 	int startingIdx = 0;
 	while (startingIdx < MAXIMUM_NUMBER_OF_INTERNAL_IDS-1 && ipList[startingIdx] != UNASSIGNED_SYSTEM_ADDRESS)
@@ -6499,15 +6491,6 @@ void RakPeer::FillIPList(void)
 		}
 		++startingIdx;
 	}
-
-	 printf("qweqwe:\n");
-  for (i=0; i < MAXIMUM_NUMBER_OF_INTERNAL_IDS; i++)
-  {
-    if (ipList[i]!=UNASSIGNED_SYSTEM_ADDRESS)
-      printf("%i. %s\n", i+1, ipList[i].ToString(false));
-    else
-      break;
-  }
 }
 
 
