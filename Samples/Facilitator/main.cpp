@@ -35,6 +35,7 @@ int main(int argc, char **argv)
   {
 	  printf ("UIP@: %s\n", rakPeer->GetLocalIP(i));
     ipList[i]=rakPeer->GetLocalIP(i);
+	printf ("hkhjks: %s\n", ipList[i].ToString());
     if (ipList[i]!=UNASSIGNED_SYSTEM_ADDRESS)
       printf("%i. %s\n", i+1, ipList[i].ToString(false));
     else
