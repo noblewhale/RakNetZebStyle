@@ -2618,11 +2618,9 @@ const char* RakPeer::GetLocalIP( unsigned int index )
 
 	}
 	
-	printf ("get local IP %s\n", ipList[index].ToString(false));
 
 	static char str[128];
 	ipList[index].ToString(false,str);
-	printf ("get local IP2 %s\n", str);
 	return str;
 
 

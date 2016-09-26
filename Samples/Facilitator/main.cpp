@@ -33,10 +33,10 @@ int main(int argc, char **argv)
   unsigned int i;
   for (i=0; i < MAXIMUM_NUMBER_OF_INTERNAL_IDS; i++)
   {
-	  printf ("UIP@: %s\n", rakPeer->GetLocalIP(i));
-    ipList[i]=rakPeer->GetLocalIP(i);
-	printf ("hkhjks: %s\n", ipList[i].ToString());
-    if (ipList[i]!=UNASSIGNED_SYSTEM_ADDRESS)
+	const char* localIP = rakPeer->GetLocalIP(i);
+	printf("qwe %s\n", localIP);
+    ipList[i]=localIP;
+	if (ipList[i] != UNASSIGNED_SYSTEM_ADDRESS)
       printf("%i. %s\n", i+1, ipList[i].ToString(false));
     else
       break;
