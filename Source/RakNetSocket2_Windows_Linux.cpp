@@ -74,9 +74,6 @@ void GetMyIP_Windows_Linux_IPV4( SystemAddress addresses[MAXIMUM_NUMBER_OF_INTER
 
 	int idx=0;
 	char ac[ 80 ];
-	int err = gethostname( ac, sizeof( ac ) );
-    //(void) err;
-	RakAssert(err != -1);
 	
 #if defined(__GLIBC__)
   struct ifaddrs *myaddrs, *ifa;
@@ -112,6 +109,9 @@ void GetMyIP_Windows_Linux_IPV4( SystemAddress addresses[MAXIMUM_NUMBER_OF_INTER
 
   freeifaddrs(myaddrs);
 #else
+	int err = gethostname( ac, sizeof( ac ) );
+    (void) err;
+	RakAssert(err != -1);
 	struct hostent *phe = gethostbyname( ac );
 
 	if ( phe == 0 )
