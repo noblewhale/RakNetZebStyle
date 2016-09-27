@@ -47,38 +47,38 @@ else
 	if [ $swigReturn == 0 ]
 	then
 		echo "Swig build complete"
-		echo "Removing and replacing the sample cs files with fresh ones"
-		mv ./SwigLinuxCSharpSample/TestMain.cs ./SwigLinuxCSharpSample/TestMain.txt 
-		rm ./SwigLinuxCSharpSample/*.cs
-		mv ./SwigLinuxCSharpSample/TestMain.txt ./SwigLinuxCSharpSample/TestMain.cs 
-		cp ./SwigOutput/SwigCSharpOutput/*.cs ./SwigLinuxCSharpSample/
-		echo "Building the Swig Dynamic Link"
-		savedDir=`pwd`		
-		cd $1
-		if [ "$2" == "" ]
-		then
-			echo "Building without SQLiteClientLogger"
-			g++ *.cpp ../DependentExtensions/Swig/SwigOutput/CplusDLLIncludes/RakNet_wrap.cxx -l pthread -I./ -shared -o RakNet
-		gccReturn=$?
-		else
-			echo "Building with SQLiteClientLogger"  
-			g++ *.cpp ../DependentExtensions/Swig/SwigOutput/CplusDLLIncludes/RakNet_wrap.cxx "$2/SQLite3ClientPlugin.cpp"  "$2/SQLite3PluginCommon.cpp" "$2/Logger/ClientOnly/SQLiteClientLoggerPlugin.cpp"  "$2/Logger/SQLiteLoggerCommon.cpp"  -l pthread -I./ -I"$2/Logger/ClientOnly" -I"$2/Logger" -I"$2" -shared -o RakNet
-		gccReturn=$?
-		fi
-		if [ $gccReturn == 0 ]
-		then
-			echo "Copying to /usr/lib/ will need root password"
-		        if su root -c "cp ./RakNet /usr/lib" #Automatically switches back after this command
-			then
-				echo "RakNet lib copied"
-			else
-				echo "RakNet lib copy failed"
-			fi
-		        echo "Exited root"		
-		else
-			echo "There was an error durion the DLL build"
-		fi
-		cd $savedDir
+#		echo "Removing and replacing the sample cs files with fresh ones"
+#		mv ./SwigLinuxCSharpSample/TestMain.cs ./SwigLinuxCSharpSample/TestMain.txt 
+#		rm ./SwigLinuxCSharpSample/*.cs
+#		mv ./SwigLinuxCSharpSample/TestMain.txt ./SwigLinuxCSharpSample/TestMain.cs 
+#		cp ./SwigOutput/SwigCSharpOutput/*.cs ./SwigLinuxCSharpSample/
+#		echo "Building the Swig Dynamic Link"
+#		savedDir=`pwd`		
+#		cd $1
+#		if [ "$2" == "" ]
+#		then
+#			echo "Building without SQLiteClientLogger"
+#			g++ *.cpp ../DependentExtensions/Swig/SwigOutput/CplusDLLIncludes/RakNet_wrap.cxx -l pthread -I./ -shared -o RakNet
+#		gccReturn=$?
+#		else
+#			echo "Building with SQLiteClientLogger"  
+#			g++ *.cpp ../DependentExtensions/Swig/SwigOutput/CplusDLLIncludes/RakNet_wrap.cxx "$2/SQLite3ClientPlugin.cpp"  "$2/SQLite3PluginCommon.cpp" "$2/Logger/ClientOnly/SQLiteClientLoggerPlugin.cpp"  "$2/Logger/SQLiteLoggerCommon.cpp"  -l pthread -I./ -I"$2/Logger/ClientOnly" -I"$2/Logger" -I"$2" -shared -o RakNet
+#		gccReturn=$?
+#		fi
+#		if [ $gccReturn == 0 ]
+#		then
+#			echo "Copying to /usr/lib/ will need root password"
+#		        if su root -c "cp ./RakNet /usr/lib" #Automatically switches back after this command
+#			then
+#				echo "RakNet lib copied"
+#			else
+#				echo "RakNet lib copy failed"
+#			fi
+#		        echo "Exited root"		
+#		else
+#			echo "There was an error durion the DLL build"
+#		fi
+#		cd $savedDir
 	else
 		echo "Swig had an error during build"
 	fi
