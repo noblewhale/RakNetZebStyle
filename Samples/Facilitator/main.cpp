@@ -92,10 +92,13 @@ int main(int argc, char **argv)
   sd[0].port=DEFAULT_RAKPEER_PORT;
   strcpy(sd[0].hostAddress, ip1);
   printf("Using port %i\n", sd[0].port);
+  printf("Using ip %s\n", sd[0].hostAddress);
   if (ip2 != NULL)
   {
     sd[1].port=DEFAULT_RAKPEER_PORT+1;
     strcpy(sd[1].hostAddress, ip2);
+	printf("Using port %i\n", sd[1].port);
+	printf("Using ip %s\n", sd[1].hostAddress);
     sdLen=2;
   }
 
